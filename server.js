@@ -68,9 +68,10 @@ app.post('/upload/:roomId', upload.single('file'), function (req, res, next) {
 
 });
 
-app.get('/download/:id', function (req, res) {
-  if (req.params.id.match(nameRegex)) {
-    res.download(uploadPath + req.params.id, 'file', function (err) {
+app.get('/download/:roomId/:id', function (req, res) {
+
+  if ((req.params.id.match(nameRegex)) && (req.params.roomId.match(nameRegex))) {
+    res.download(uploadPath + req.params.roomId + '/' + req.params.id, 'file', function (err) {
       if (err) {
         // Handle error, but keep in mind the response may be partially-sent
         // so check res.headersSent
@@ -84,6 +85,8 @@ app.get('/download/:id', function (req, res) {
     );
   } else {
     console.log(req.params.roomId + " not match");
+    console.log(req.params.id + " not match");
+
     res.sendStatus(400);
   }
 
