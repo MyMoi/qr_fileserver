@@ -63,7 +63,7 @@ app.post('/upload/:roomId', upload.single('file'), function (req, res, next) {
     }
   } else {
     res.send(400);
-    console.log("file null");
+    //console.log("file null");
   }
 
 });
